@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getPosts, createPost, updatePost, deletePost } from './api';
+import './App.css';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -43,7 +44,7 @@ function App() {
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: 'auto' }}>
+    <div className="app-container">
       <h1>Simple Message Board</h1>
       <form onSubmit={handleSubmit}>
         <input
@@ -65,10 +66,14 @@ function App() {
       </form>
       <ul>
         {posts.map(post => (
-          <li key={post.id}>
-            <b>{post.name}:</b> {post.message}
-            <button onClick={() => handleEdit(post)}>Edit</button>
-            <button onClick={() => handleDelete(post.id)}>Delete</button>
+          <li key={post.id} className="message-row">
+            <div className="message-content">
+              <b>{post.name}:</b> {post.message}
+            </div>
+            <div className="actions">
+              <button onClick={() => handleEdit(post)}>Edit</button>
+              <button onClick={() => handleDelete(post.id)}>Delete</button>
+            </div>
           </li>
         ))}
       </ul>
